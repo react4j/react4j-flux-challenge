@@ -1,5 +1,6 @@
 package react4j.sithtracker;
 
+import arez.Arez;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import react4j.ReactNode;
@@ -27,6 +28,9 @@ public abstract class SithView
   @Override
   protected ReactNode render()
   {
+    //TODO: Add a fake observe until can tell react4j that it is okay if no observe
+    Arez.context().observable().reportObserved();
+
     final Sith sith = sith();
     if ( null != sith && sith.isLoaded() )
     {
