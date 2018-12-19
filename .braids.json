@@ -1,0 +1,10 @@
+{
+  "config_version": 1,
+  "mirrors": {
+    "vendor/flux-challenge": {
+      "url": "https://github.com/staltz/flux-challenge.git",
+      "branch": "master",
+      "revision": "961b12fd7e0a263b2c32b7e846fce68c189ec265"
+    }
+  }
+}
