@@ -9,6 +9,11 @@ import javax.annotation.Nullable;
 public abstract class Sith
 {
   @Observable
+  public abstract int getId();
+
+  public abstract void setId( int id );
+
+  @Observable
   @Nonnull
   public abstract String getName();
 
