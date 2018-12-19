@@ -1,0 +1,50 @@
+repositories:
+  remote:
+   - https://stocksoftware.jfrog.io/stocksoftware/staging
+   - http://repo1.maven.org/maven2
+   - https://stocksoftware.jfrog.io/stocksoftware/public
+   - https://stocksoftware.jfrog.io/stocksoftware/oss
+
+artifacts:
+  idea_codestyle: au.com.stocksoftware.idea.codestyle:idea-codestyle:xml:1.13
+
+  javax_annotation: org.realityforge.javax.annotation:javax.annotation:jar:1.0.0
+  jetbrains_annotations: org.realityforge.org.jetbrains.annotations:org.jetbrains.annotations:jar:1.0.0
+
+  # GWT deps
+  gwt_user: com.google.gwt:gwt-user:jar:2.8.2
+  gwt_dev: com.google.gwt:gwt-dev:jar:2.8.2
+
+  jsinterop_annotations: com.google.jsinterop:jsinterop-annotations:jar:1.0.2
+
+  jsinterop_base: com.google.jsinterop:base:jar:1.0.0-RC1
+
+  elemental2_core: com.google.elemental2:elemental2-core:jar:1.0.0-RC1
+  elemental2_dom: com.google.elemental2:elemental2-dom:jar:1.0.0-RC1
+  elemental2_promise: com.google.elemental2:elemental2-promise:jar:1.0.0-RC1
+
+  react4j_core: org.realityforge.react4j:react4j-core:jar:0.109
+  react4j_dom: org.realityforge.react4j:react4j-dom:jar:0.109
+  react4j_processor: org.realityforge.react4j:react4j-processor:jar:0.109
+  react4j_arez: org.realityforge.react4j:react4j-arez:jar:0.109
+
+  arez_core: org.realityforge.arez:arez-core:jar:0.121
+  arez_processor: org.realityforge.arez:arez-processor:jar:0.121
+  arez_spytools: org.realityforge.arez.spytools:arez-spytools:jar:0.37
+
+  braincheck: org.realityforge.braincheck:braincheck:jar:1.9.0
+
+  dagger_core: com.google.dagger:dagger:jar:2.15
+  dagger_spi: com.google.dagger:dagger-spi:jar:2.15
+  dagger_producers: com.google.dagger:dagger-producers:jar:2.15
+  dagger_compiler: com.google.dagger:dagger-compiler:jar:2.15
+  googlejavaformat: com.google.googlejavaformat:google-java-format:jar:1.4
+  errorprone: com.google.errorprone:javac-shaded:jar:9-dev-r4023-3
+  javapoet: com.squareup:javapoet:jar:1.8.0
+  guava: com.google.guava:guava:jar:23.3-jre
+
+  dagger_core_sources: com.google.dagger:dagger:jar:sources:2.15
+  dagger_gwt: org.realityforge.dagger:dagger-gwt-lite:jar:sources:1.0.2
+
+  javax_inject: javax.inject:javax.inject:jar:1
+  javax_inject_sources: javax.inject:javax.inject:jar:sources:1
