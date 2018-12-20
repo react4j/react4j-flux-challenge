@@ -39,7 +39,7 @@ public abstract class SithView
                    .className( "css-slot" )
                    .style( new CssProps().color( livesOnCurrentWorld ? "red" : null ) ),
                  h3( sith.getName() ),
-                 h6( "Home world: " + sith.getHomeworld() ) );
+                 h6( "Home world: " + sith.getHomeworld().getName() ) );
     }
     else
     {
