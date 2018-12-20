@@ -32,7 +32,7 @@ public abstract class SithView
     Arez.context().observable().reportObserved();
 
     final Sith sith = sith();
-    if ( null != sith && sith.isLoaded() )
+    if ( null != sith )
     {
       final boolean livesOnCurrentWorld = _model.getCurrentWorld().getId() == sith.getHomeworld().getId();
       return li( new HtmlProps()
