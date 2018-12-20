@@ -37,8 +37,5 @@ public abstract class Sith
 
   public abstract void setApprentice( @Nullable String apprentice );
 
-  @Observable
-  public abstract boolean isLoaded();
 
-  public abstract void setLoaded( boolean loaded );
 }
