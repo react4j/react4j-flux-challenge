@@ -70,11 +70,11 @@ abstract class SithPlaceholder
       .then( Response::json )
       .then( v -> {
         final JsPropertyMap<Object> data = Js.asPropertyMap( v );
-        setSith( Sith.create( _id,
-                              data.getAny( "name" ).asString(),
-                              data.getAny( "homeworld" ).cast(),
-                              data.getAny( "master" ).asPropertyMap().getAny( "id" ).asInt(),
-                              data.getAny( "apprentice" ).asPropertyMap().getAny( "id" ).asInt() ) );
+        setSith( new Sith( _id,
+                           data.getAny( "name" ).asString(),
+                           data.getAny( "homeworld" ).cast(),
+                           data.getAny( "master" ).asPropertyMap().getAny( "id" ).asInt(),
+                           data.getAny( "apprentice" ).asPropertyMap().getAny( "id" ).asInt() ) );
         onLoadComplete.call();
         return null;
       } )

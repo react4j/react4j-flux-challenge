@@ -1,50 +1,60 @@
 package react4j.sithtracker.model;
 
-import arez.annotations.ArezComponent;
-import arez.annotations.Feature;
-import arez.annotations.Observable;
+import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-@ArezComponent
-public abstract class Sith
+public final class Sith
 {
+  private final int _id;
   @Nonnull
-  public static Sith create( final int id,
-                             @Nonnull final String name,
-                             @Nonnull final World homeworld,
-                             @Nullable final Integer masterId,
-                             @Nullable final Integer apprenticeId )
+  private final String _name;
+  @Nonnull
+  private final World _homeworld;
+  @Nullable
+  private final Integer _masterId;
+  @Nullable
+  private final Integer _apprenticeId;
+
+  public Sith( final int id,
+               @Nonnull final String name,
+               @Nonnull final World homeworld,
+               @Nullable final Integer masterId,
+               @Nullable final Integer apprenticeId )
   {
-    return new Arez_Sith( id, name, homeworld, masterId, apprenticeId );
+    _id = id;
+    _name = Objects.requireNonNull( name );
+    _homeworld = Objects.requireNonNull( homeworld );
+    _masterId = masterId;
+    _apprenticeId = apprenticeId;
   }
 
-  @Observable( initializer = Feature.ENABLE )
-  public abstract int getId();
+  public int getId()
+  {
+    return _id;
+  }
 
-  public abstract void setId( int id );
-
-  @Observable
   @Nonnull
-  public abstract String getName();
+  public String getName()
+  {
+    return _name;
+  }
 
-  public abstract void setName( @Nonnull String name );
-
-  @Observable
   @Nonnull
-  public abstract World getHomeworld();
+  public World getHomeworld()
+  {
+    return _homeworld;
+  }
 
-  public abstract void setHomeworld( @Nonnull World homeworld );
-
-  @Observable( initializer = Feature.ENABLE )
   @Nullable
-  public abstract Integer getMasterId();
+  public Integer getMasterId()
+  {
+    return _masterId;
+  }
 
-  public abstract void setMasterId( @Nullable Integer masterId );
-
-  @Observable( initializer = Feature.ENABLE )
   @Nullable
-  public abstract Integer getApprenticeId();
-
-  public abstract void setApprenticeId( @Nullable Integer apprenticeId );
+  public Integer getApprenticeId()
+  {
+    return _apprenticeId;
+  }
 }
