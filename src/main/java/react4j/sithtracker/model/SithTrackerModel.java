@@ -1,19 +1,17 @@
 package react4j.sithtracker.model;
 
 import arez.ComputableValue;
-import arez.ObservableValue;
 import arez.annotations.Action;
 import arez.annotations.ArezComponent;
 import arez.annotations.ComputableValueRef;
 import arez.annotations.DepType;
 import arez.annotations.Memoize;
-import arez.annotations.Observable;
-import arez.annotations.ObservableValueRef;
 import arez.annotations.PostConstruct;
 import arez.annotations.PreDispose;
 import elemental2.dom.WebSocket;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.inject.Singleton;
 
@@ -25,7 +23,7 @@ public abstract class SithTrackerModel
   @Nonnull
   private World _currentWorld = World.create( -1, "" );
   @Nonnull
-  private final Sith[] _siths = new Sith[ 5 ];
+  private final SithPlaceholder[] _siths = new SithPlaceholder[ 5 ];
 
   SithTrackerModel()
   {
@@ -40,6 +38,7 @@ public abstract class SithTrackerModel
       //TODO: Why does elemental2 define a return type here?
       return null;
     };
+    loadSith( 3616, 2 );
   }
 
   @PreDispose
@@ -67,15 +66,18 @@ public abstract class SithTrackerModel
   {
   }
 
-  @Observable( expectSetter = false )
+  @Memoize( depType = DepType.AREZ_OR_EXTERNAL )
   @Nonnull
   public List<Sith> getSithWindow()
   {
-    return Arrays.asList( _siths );
+    return Arrays
+      .stream( _siths )
+      .map( e -> null == e || e.isLoading() ? null : e.getSith() )
+      .collect( Collectors.toList() );
   }
 
-  @ObservableValueRef
-  abstract ObservableValue getSithWindowObservableValue();
+  @ComputableValueRef
+  abstract ComputableValue getSithWindowComputableValue();
 
   @Memoize( depType = DepType.AREZ_OR_EXTERNAL )
   @Nonnull
@@ -93,5 +95,53 @@ public abstract class SithTrackerModel
   {
     _currentWorld = currentWorld;
     getCurrentWorldComputableValue().reportPossiblyChanged();
+  }
+
+  void loadSith( final int sithId, final int position )
+  {
+    if ( null == _siths[ position ] )
+    {
+      final SithPlaceholder entry = SithPlaceholder.create( sithId );
+      _siths[ position ] = entry;
+      entry.load( () -> completeSithLoad( entry ) );
+    }
+    else
+    {
+      assert _siths[ position ].getId() == sithId;
+    }
+  }
+
+  @Action( verifyRequired = false )
+  void completeSithLoad( @Nonnull final SithPlaceholder entry )
+  {
+    getSithWindowComputableValue().reportPossiblyChanged();
+    final int position = positionOf( entry );
+
+    final Sith sith = entry.getSith();
+    final Integer masterId = sith.getMasterId();
+    if ( null != masterId && position > 0 && null == _siths[ position - 1 ] )
+    {
+      loadSith( masterId, position - 1 );
+    }
+    final Integer apprenticeId = sith.getApprenticeId();
+    if ( null != apprenticeId && position < _siths.length - 1 && null == _siths[ position + 1 ] )
+    {
+      loadSith( apprenticeId, position + 1 );
+    }
+  }
+
+  private int positionOf( @Nonnull final SithPlaceholder entry )
+  {
+    int position = -1;
+    for ( int i = 0; i < _siths.length; i++ )
+    {
+      if ( _siths[ i ] == entry )
+      {
+        position = i;
+        break;
+      }
+    }
+    assert position >= 0;
+    return position;
   }
 }
