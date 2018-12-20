@@ -22,16 +22,13 @@ public abstract class SithTrackerView
   @Override
   protected ReactNode render()
   {
-    int[] sithIndex = new int[ 0 ];
     return div( new HtmlProps().className( "app-container" ),
                 div( new HtmlProps().className( "css-root" ),
                      h1( new HtmlProps().className( "css-planet-monitor" ),
                          "Obi-Wan currently on " + _model.getCurrentWorld().getName() ),
                      section( new HtmlProps().className( "css-scrollable-list" ),
                               ul( new HtmlProps().className( "css-slots" ),
-                                  fragment( _model.getSithWindow()
-                                              .stream()
-                                              .map( sith -> renderSith( sith, sithIndex ) ) )
+                                  fragment( _model.getSithWindow().stream().map( this::renderSith ) )
                               ),
                               div( new HtmlProps().className( "css-scroll-buttons" ),
                                    ScrollButtonBuilder
@@ -49,10 +46,8 @@ public abstract class SithTrackerView
   }
 
   @Nonnull
-  private ReactNode renderSith( @Nonnull final Sith sith, final int[] sithIndex )
+  private ReactNode renderSith( @Nullable final Sith sith )
   {
-    // TODO: Ugly hack required here as key can not be null. Should instead use null when sith not present
-    final String key = String.valueOf( null != sith ? sith.getId() : -( sithIndex[ 0 ]++ ) );
-    return SithViewBuilder.key( key ).sith( sith );
+    return null == sith ? SithViewBuilder.sith( null ) : SithViewBuilder.key( sith.getId() ).sith( sith );
   }
 }
