@@ -25,7 +25,7 @@ public abstract class SithTrackerView
     return div( new HtmlProps().className( "app-container" ),
                 div( new HtmlProps().className( "css-root" ),
                      h1( new HtmlProps().className( "css-planet-monitor" ),
-                         "Obi-Wan currently on " + _model.getCurrentWorld().getName() ),
+                         "Obi-Wan currently on " + _model.getCurrentPlanet().getName() ),
                      section( new HtmlProps().className( "css-scrollable-list" ),
                               ul( new HtmlProps().className( "css-slots" ),
                                   fragment( _model.getSithWindow().stream().map( this::renderSith ) )

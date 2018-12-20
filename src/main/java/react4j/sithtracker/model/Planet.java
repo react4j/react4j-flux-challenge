@@ -8,26 +8,26 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 @JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" )
-public final class World
+public final class Planet
 {
   private int id;
   private String name;
 
   @JsOverlay
   @Nonnull
-  public static World create( final int id, @Nonnull final String name )
+  public static Planet create( final int id, @Nonnull final String name )
   {
-    final World world = new World();
-    world.id = id;
-    world.name = Objects.requireNonNull( name );
-    return world;
+    final Planet planet = new Planet();
+    planet.id = id;
+    planet.name = Objects.requireNonNull( name );
+    return planet;
   }
 
   @JsOverlay
   @Nonnull
-  public static World parse( @Nonnull final String jsonData )
+  public static Planet parse( @Nonnull final String jsonData )
   {
-    return (World) Global.JSON.parse( jsonData );
+    return (Planet) Global.JSON.parse( jsonData );
   }
 
   @JsOverlay

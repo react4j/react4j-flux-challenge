@@ -21,7 +21,7 @@ public abstract class SithTrackerModel
 {
   private WebSocket _webSocket;
   @Nonnull
-  private World _currentWorld = World.create( -1, "" );
+  private Planet _currentPlanet = Planet.create( -1, "" );
   @Nonnull
   private final SithPlaceholder[] _siths = new SithPlaceholder[ 5 ];
 
@@ -34,7 +34,7 @@ public abstract class SithTrackerModel
   {
     _webSocket = new WebSocket( "ws://localhost:4000" );
     _webSocket.onmessage = msg -> {
-      setCurrentWorld( World.parse( String.valueOf( msg.data ) ) );
+      setCurrentPlanet( Planet.parse( String.valueOf( msg.data ) ) );
       //TODO: Why does elemental2 define a return type here?
       return null;
     };
@@ -81,9 +81,9 @@ public abstract class SithTrackerModel
 
   @Memoize( depType = DepType.AREZ_OR_EXTERNAL )
   @Nonnull
-  public World getCurrentWorld()
+  public Planet getCurrentPlanet()
   {
-    return _currentWorld;
+    return _currentPlanet;
   }
 
   @ComputableValueRef
@@ -91,9 +91,9 @@ public abstract class SithTrackerModel
   abstract ComputableValue getCurrentWorldComputableValue();
 
   @Action
-  void setCurrentWorld( @Nonnull final World currentWorld )
+  void setCurrentPlanet( @Nonnull final Planet currentPlanet )
   {
-    _currentWorld = currentWorld;
+    _currentPlanet = currentPlanet;
     getCurrentWorldComputableValue().reportPossiblyChanged();
   }
 

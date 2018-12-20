@@ -10,7 +10,7 @@ public final class Sith
   @Nonnull
   private final String _name;
   @Nonnull
-  private final World _homeworld;
+  private final Planet _homeworld;
   @Nullable
   private final Integer _masterId;
   @Nullable
@@ -18,7 +18,7 @@ public final class Sith
 
   public Sith( final int id,
                @Nonnull final String name,
-               @Nonnull final World homeworld,
+               @Nonnull final Planet homeworld,
                @Nullable final Integer masterId,
                @Nullable final Integer apprenticeId )
   {
@@ -41,7 +41,7 @@ public final class Sith
   }
 
   @Nonnull
-  public World getHomeworld()
+  public Planet getHomeworld()
   {
     return _homeworld;
   }

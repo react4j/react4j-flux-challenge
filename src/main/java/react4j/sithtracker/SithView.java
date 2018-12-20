@@ -34,7 +34,7 @@ public abstract class SithView
     final Sith sith = sith();
     if ( null != sith )
     {
-      final boolean livesOnCurrentWorld = _model.getCurrentWorld().getId() == sith.getHomeworld().getId();
+      final boolean livesOnCurrentWorld = _model.getCurrentPlanet().getId() == sith.getHomeworld().getId();
       return li( new HtmlProps()
                    .className( "css-slot" )
                    .style( new CssProps().color( livesOnCurrentWorld ? "red" : null ) ),
