@@ -19,6 +19,7 @@ import javax.inject.Singleton;
 @ArezComponent
 public abstract class SithTrackerModel
 {
+  private static final int DARTH_SIDIOUS_ID = 3616;
   private WebSocket _webSocket;
   @Nonnull
   private Planet _currentPlanet = Planet.create( -1, "" );
@@ -38,7 +39,7 @@ public abstract class SithTrackerModel
       //TODO: Why does elemental2 define a return type here?
       return null;
     };
-    loadSith( 3616, 2 );
+    loadSith( DARTH_SIDIOUS_ID, 2 );
   }
 
   @PreDispose
