@@ -1,4 +1,4 @@
-package react4j.sithtracker;
+package react4j.sithtracker.views;
 
 import arez.Arez;
 import javax.annotation.Nullable;

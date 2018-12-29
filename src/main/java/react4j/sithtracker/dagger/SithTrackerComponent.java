@@ -2,10 +2,10 @@ package react4j.sithtracker.dagger;
 
 import dagger.Component;
 import javax.inject.Singleton;
-import react4j.sithtracker.SithListViewDaggerFactory;
-import react4j.sithtracker.SithTrackerViewDaggerFactory;
-import react4j.sithtracker.SithViewDaggerFactory;
 import react4j.sithtracker.model.SithTrackerModelDaggerModule;
+import react4j.sithtracker.views.SithListViewDaggerFactory;
+import react4j.sithtracker.views.SithTrackerViewDaggerFactory;
+import react4j.sithtracker.views.SithViewDaggerFactory;
 
 @Singleton
 @Component( modules = { SithTrackerModelDaggerModule.class } )

@@ -1,4 +1,4 @@
-package react4j.sithtracker;
+package react4j.sithtracker.views;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;

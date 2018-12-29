@@ -4,6 +4,7 @@ import com.google.gwt.core.client.EntryPoint;
 import elemental2.dom.DomGlobal;
 import react4j.dom.ReactDOM;
 import react4j.sithtracker.dagger.SithTrackerComponent;
+import react4j.sithtracker.views.SithTrackerViewBuilder;
 
 public class App
   implements EntryPoint
