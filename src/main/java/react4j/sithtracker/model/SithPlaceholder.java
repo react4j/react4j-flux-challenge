@@ -4,6 +4,7 @@ import arez.SafeProcedure;
 import arez.annotations.ArezComponent;
 import arez.annotations.ComponentId;
 import arez.annotations.Observable;
+import arez.annotations.PreDispose;
 import elemental2.dom.DomGlobal;
 import elemental2.dom.Response;
 import java.util.Objects;
@@ -36,8 +37,23 @@ abstract class SithPlaceholder
     return _id;
   }
 
+  @PreDispose
+  final void preDispose()
+  {
+    if ( isLoading() )
+    {
+      cancelLoading();
+    }
+  }
+
+  private void cancelLoading()
+  {
+    //TODO: Trigger abort controller here
+  }
+
   boolean isLoading()
   {
+    //TODO: assert (null == _sith) == (null == _abortController);
     return null == sith();
   }
 
@@ -79,10 +95,12 @@ abstract class SithPlaceholder
                            // When sith has no apprentice, the apprentice object is still returned but the id is null
                            maybeInt( data.getAny( "apprentice" ).asPropertyMap().getAny( "id" ) ) ) );
         onLoadComplete.call();
+        //TODO: Clear abort controller here
         return null;
       } )
       .catch_( error -> {
         DomGlobal.console.log( "Error loading sith " + getId(), error );
+        //TODO: Clear abort controller here
         return null;
       } );
   }
