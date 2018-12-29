@@ -6,7 +6,9 @@ import arez.annotations.Action;
 import arez.annotations.ArezComponent;
 import arez.annotations.ComputableValueRef;
 import arez.annotations.DepType;
+import arez.annotations.Feature;
 import arez.annotations.Memoize;
+import arez.annotations.Observable;
 import arez.annotations.PostConstruct;
 import arez.annotations.PreDispose;
 import elemental2.dom.WebSocket;
@@ -24,8 +26,6 @@ public abstract class SithTrackerModel
   private static final int ENTRY_COUNT = 5;
   private static final int STEP_SIZE = 2;
   private WebSocket _webSocket;
-  @Nonnull
-  private Planet _currentPlanet = Planet.create( -1, "" );
   @Nonnull
   private final ArrayList<SithPlaceholder> _siths = new ArrayList<>( ENTRY_COUNT );
 
@@ -47,6 +47,7 @@ public abstract class SithTrackerModel
       return null;
     };
     loadSith( DARTH_SIDIOUS_ID, 2 );
+    setCurrentPlanet( Planet.create( -1, "" ) );
   }
 
   @PreDispose
@@ -146,23 +147,11 @@ public abstract class SithTrackerModel
   @ComputableValueRef
   abstract ComputableValue getSithsComputableValue();
 
-  @Memoize( depType = DepType.AREZ_OR_EXTERNAL )
+  @Observable( writeOutsideTransaction = true, initializer = Feature.DISABLE )
   @Nonnull
-  public Planet getCurrentPlanet()
-  {
-    return _currentPlanet;
-  }
+  public abstract Planet getCurrentPlanet();
 
-  @ComputableValueRef
-  @Nonnull
-  abstract ComputableValue getCurrentPlanetComputableValue();
-
-  @Action
-  void setCurrentPlanet( @Nonnull final Planet currentPlanet )
-  {
-    _currentPlanet = currentPlanet;
-    getCurrentPlanetComputableValue().reportPossiblyChanged();
-  }
+  abstract void setCurrentPlanet( @Nonnull Planet currentPlanet );
 
   private void loadSith( final int sithId, final int position )
   {
