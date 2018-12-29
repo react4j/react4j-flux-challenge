@@ -95,10 +95,4 @@ abstract class SithPlaceholder
         return null;
       } );
   }
-
-  @Nullable
-  private Integer maybeInt( @Nullable final Any any )
-  {
-    return null == any ? null : any.asInt();
-  }
 }
