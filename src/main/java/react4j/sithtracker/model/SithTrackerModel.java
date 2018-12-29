@@ -102,9 +102,9 @@ public abstract class SithTrackerModel
 
   private void loadSith( final int sithId, final int position )
   {
-    final SithPlaceholder entry = SithPlaceholder.create( sithId );
-    _siths.set( position, entry );
-    entry.load( () -> completeSithLoad( entry ) );
+    final SithPlaceholder placeholder = SithPlaceholder.create( sithId );
+    _siths.set( position, placeholder );
+    placeholder.load( () -> loadSithGenealogy( placeholder ) );
   }
 
   @Action( verifyRequired = false )
