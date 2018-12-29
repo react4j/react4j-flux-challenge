@@ -108,13 +108,13 @@ public abstract class SithTrackerModel
   }
 
   @Action( verifyRequired = false )
-  void completeSithLoad( @Nonnull final SithPlaceholder entry )
+  void loadSithGenealogy( @Nonnull final SithPlaceholder placeholder )
   {
-    final int position = _siths.indexOf( entry );
+    final int position = _siths.indexOf( placeholder );
     if ( -1 != position )
     {
       getSithWindowComputableValue().reportPossiblyChanged();
-      final Sith sith = entry.getSith();
+      final Sith sith = placeholder.getSith();
       final Integer masterId = sith.getMasterId();
       if ( null != masterId && position > 0 && null == _siths.get( position - 1 ) )
       {
