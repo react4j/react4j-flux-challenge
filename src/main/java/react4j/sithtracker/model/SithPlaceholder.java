@@ -10,13 +10,16 @@ import elemental2.dom.Response;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import jsinterop.base.Any;
+import jsinterop.base.Js;
+import jsinterop.base.JsPropertyMap;
+import react4j.sithtracker.api.AbortController;
 
 @ArezComponent
 abstract class SithPlaceholder
 {
   private final int _id;
   private Sith _sith;
+  private AbortController _abortController;
 
   @Nonnull
   static SithPlaceholder create( final int id )
@@ -43,15 +46,15 @@ abstract class SithPlaceholder
 
   private void cancelLoading()
   {
-    //TODO: Trigger abort controller here
-    //if ( null != _abortController )
-    //{
-    //}
+    if ( null != _abortController )
+    {
+      _abortController.abort();
+    }
   }
 
   boolean isLoading()
   {
-    //TODO: assert (null == _sith) == (null == _abortController);
+    assert ( null != _sith ) == ( null == _abortController );
     return null == sith();
   }
 
@@ -78,20 +81,20 @@ abstract class SithPlaceholder
 
   void load( @Nonnull SafeProcedure onLoadComplete )
   {
-    //TODO: AbortController - https://developer.mozilla.org/en-US/docs/Web/API/AbortController/AbortController
-    // Is it not present in Elemental2?
+    _abortController = new AbortController();
     DomGlobal
-      .fetch( "http://localhost:3000/dark-jedis/" + getId() )
+      .fetch( "http://localhost:3000/dark-jedis/" + getId(),
+              Js.cast( JsPropertyMap.of( "signal", _abortController.signal ) ) )
       .then( Response::text )
       .then( v -> {
+        _abortController = null;
         setSith( Sith.parse( v ) );
         onLoadComplete.call();
-        //TODO: Clear abort controller here
         return null;
       } )
       .catch_( error -> {
         DomGlobal.console.log( "Error loading sith " + getId(), error );
-        //TODO: Clear abort controller here
+        _abortController = null;
         return null;
       } );
   }
