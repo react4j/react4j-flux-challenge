@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.inject.Singleton;
 
 @Singleton
@@ -25,6 +26,7 @@ public abstract class SithTrackerModel
   private static final int DARTH_SIDIOUS_ID = 3616;
   private static final int MAX_VISIBLE_SITHS = 5;
   private static final int NUMBER_OF_SITHS_TO_SCROLL = 2;
+  @Nullable
   private WebSocket _webSocket;
   @Nonnull
   private final ArrayList<SithPlaceholder> _siths = new ArrayList<>( MAX_VISIBLE_SITHS );
