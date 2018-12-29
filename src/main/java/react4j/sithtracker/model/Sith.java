@@ -4,6 +4,7 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+//TODO: Sith should be @JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" ) now that it is no longer reactive
 public final class Sith
 {
   private final int _id;
