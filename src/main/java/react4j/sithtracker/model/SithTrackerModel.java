@@ -91,6 +91,7 @@ public abstract class SithTrackerModel
         moveSithLord( i - STEP_SIZE, i );
       }
       loadSithGenealogy( _siths.get( STEP_SIZE ) );
+      getSithsComputableValue().reportPossiblyChanged();
     }
   }
 
@@ -134,6 +135,7 @@ public abstract class SithTrackerModel
         moveSithLord( i, i - STEP_SIZE );
       }
       loadSithGenealogy( _siths.get( ENTRY_COUNT - STEP_SIZE - 1 ) );
+      getSithsComputableValue().reportPossiblyChanged();
     }
   }
 
