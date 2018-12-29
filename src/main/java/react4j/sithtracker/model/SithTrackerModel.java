@@ -71,12 +71,6 @@ public abstract class SithTrackerModel
     }
   }
 
-  private boolean areAnySithLordsOnCurrentPlanet()
-  {
-    return getSiths().stream()
-      .anyMatch( sith -> null != sith && getCurrentPlanet().getId() == sith.getHomeworld().getId() );
-  }
-
   @Action
   public void scrollUp()
   {
@@ -93,18 +87,6 @@ public abstract class SithTrackerModel
       loadSithGenealogy( _siths.get( NUMBER_OF_SITHS_TO_SCROLL ) );
       getSithsComputableValue().reportPossiblyChanged();
     }
-  }
-
-  private void clearSithLordAt( final int index )
-  {
-    Disposable.dispose( _siths.get( index ) );
-    _siths.set( index, null );
-  }
-
-  private void moveSithLord( final int fromIndex, final int toIndex )
-  {
-    _siths.set( toIndex, _siths.get( fromIndex ) );
-    _siths.set( fromIndex, null );
   }
 
   @Memoize
@@ -155,13 +137,6 @@ public abstract class SithTrackerModel
 
   abstract void setCurrentPlanet( @Nonnull Planet currentPlanet );
 
-  private void loadSith( final int sithId, final int position )
-  {
-    final SithPlaceholder placeholder = SithPlaceholder.create( sithId );
-    _siths.set( position, placeholder );
-    placeholder.load( () -> loadSithGenealogy( placeholder ) );
-  }
-
   @Action( verifyRequired = false )
   void loadSithGenealogy( @Nonnull final SithPlaceholder placeholder )
   {
@@ -181,5 +156,30 @@ public abstract class SithTrackerModel
         loadSith( apprenticeId, position + 1 );
       }
     }
+  }
+
+  private void loadSith( final int sithId, final int position )
+  {
+    final SithPlaceholder placeholder = SithPlaceholder.create( sithId );
+    _siths.set( position, placeholder );
+    placeholder.load( () -> loadSithGenealogy( placeholder ) );
+  }
+
+  private boolean areAnySithLordsOnCurrentPlanet()
+  {
+    return getSiths().stream()
+      .anyMatch( sith -> null != sith && getCurrentPlanet().getId() == sith.getHomeworld().getId() );
+  }
+
+  private void clearSithLordAt( final int index )
+  {
+    Disposable.dispose( _siths.get( index ) );
+    _siths.set( index, null );
+  }
+
+  private void moveSithLord( final int fromIndex, final int toIndex )
+  {
+    _siths.set( toIndex, _siths.get( fromIndex ) );
+    _siths.set( fromIndex, null );
   }
 }
