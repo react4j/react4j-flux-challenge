@@ -65,17 +65,15 @@ public abstract class SithTrackerModel
     }
     else
     {
-      final SithPlaceholder placeholder = _siths.get( 0 );
-      return null != placeholder &&
-             !placeholder.isLoading() &&
-             null != placeholder.getSith().getMasterId();
+      final Sith sith = getSithWindow().get( 0 );
+      return null != sith && null != sith.getMasterId();
     }
   }
 
   private boolean areAnySithOnCurrentPlanet()
   {
-    return _siths.stream()
-      .anyMatch( p -> null != p && !p.isLoading() && getCurrentPlanet().getId() == p.getSith().getHomeworld().getId() );
+    return getSithWindow().stream()
+      .anyMatch( sith -> null != sith && getCurrentPlanet().getId() == sith.getHomeworld().getId() );
   }
 
   @Action
