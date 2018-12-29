@@ -74,6 +74,7 @@ abstract class SithPlaceholder
         setSith( new Sith( _id,
                            data.getAny( "name" ).asString(),
                            data.getAny( "homeworld" ).cast(),
+                           // When sith has no master, the master object is still returned but the id is null
                            maybeInt( data.getAny( "master" ).asPropertyMap().getAny( "id" ) ),
                            // When sith has no apprentice, the apprentice object is still returned but the id is null
                            maybeInt( data.getAny( "apprentice" ).asPropertyMap().getAny( "id" ) ) ) );
