@@ -83,16 +83,26 @@ public abstract class SithTrackerModel
     {
       for ( int i = ENTRY_COUNT - STEP_SIZE; i < ENTRY_COUNT; i++ )
       {
-        Disposable.dispose( _siths.get( i ) );
-        _siths.set( i, null );
+        clearSith( i );
       }
       for ( int i = ENTRY_COUNT - 1; i >= STEP_SIZE; i-- )
       {
-        _siths.set( i, _siths.get( i - STEP_SIZE ) );
-        _siths.set( i - STEP_SIZE, null );
+        moveSith( i - STEP_SIZE, i );
       }
       loadSithGenealogy( _siths.get( STEP_SIZE ) );
     }
+  }
+
+  private void clearSith( final int index )
+  {
+    Disposable.dispose( _siths.get( index ) );
+    _siths.set( index, null );
+  }
+
+  private void moveSith( final int fromIndex, final int toIndex )
+  {
+    _siths.set( toIndex, _siths.get( fromIndex ) );
+    _siths.set( fromIndex, null );
   }
 
   public boolean canScrollDown()
