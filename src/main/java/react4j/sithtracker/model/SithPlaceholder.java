@@ -38,15 +38,15 @@ abstract class SithPlaceholder
   @PreDispose
   final void preDispose()
   {
-    if ( isLoading() )
-    {
-      cancelLoading();
-    }
+    cancelLoading();
   }
 
   private void cancelLoading()
   {
     //TODO: Trigger abort controller here
+    //if ( null != _abortController )
+    //{
+    //}
   }
 
   boolean isLoading()
