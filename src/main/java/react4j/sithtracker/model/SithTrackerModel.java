@@ -20,19 +20,19 @@ import javax.inject.Singleton;
 public abstract class SithTrackerModel
 {
   private static final int DARTH_SIDIOUS_ID = 3616;
+  private static final int ENTRY_COUNT = 5;
   private WebSocket _webSocket;
   @Nonnull
   private Planet _currentPlanet = Planet.create( -1, "" );
   @Nonnull
-  private final ArrayList<SithPlaceholder> _siths = new ArrayList<>( 5 );
+  private final ArrayList<SithPlaceholder> _siths = new ArrayList<>( ENTRY_COUNT );
 
   SithTrackerModel()
   {
-    _siths.add( null );
-    _siths.add( null );
-    _siths.add( null );
-    _siths.add( null );
-    _siths.add( null );
+    for ( int i = 0; i < ENTRY_COUNT; i++ )
+    {
+      _siths.add( null );
+    }
   }
 
   @PostConstruct
