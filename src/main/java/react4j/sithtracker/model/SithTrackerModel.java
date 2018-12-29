@@ -23,15 +23,15 @@ import javax.inject.Singleton;
 public abstract class SithTrackerModel
 {
   private static final int DARTH_SIDIOUS_ID = 3616;
-  private static final int ENTRY_COUNT = 5;
-  private static final int STEP_SIZE = 2;
+  private static final int MAX_VISIBLE_SITHS = 5;
+  private static final int NUMBER_OF_SITHS_TO_SCROLL = 2;
   private WebSocket _webSocket;
   @Nonnull
-  private final ArrayList<SithPlaceholder> _siths = new ArrayList<>( ENTRY_COUNT );
+  private final ArrayList<SithPlaceholder> _siths = new ArrayList<>( MAX_VISIBLE_SITHS );
 
   SithTrackerModel()
   {
-    for ( int i = 0; i < ENTRY_COUNT; i++ )
+    for ( int i = 0; i < MAX_VISIBLE_SITHS; i++ )
     {
       _siths.add( null );
     }
@@ -82,15 +82,15 @@ public abstract class SithTrackerModel
   {
     if ( canScrollUp() )
     {
-      for ( int i = ENTRY_COUNT - STEP_SIZE; i < ENTRY_COUNT; i++ )
+      for ( int i = MAX_VISIBLE_SITHS - NUMBER_OF_SITHS_TO_SCROLL; i < MAX_VISIBLE_SITHS; i++ )
       {
         clearSithLordAt( i );
       }
-      for ( int i = ENTRY_COUNT - 1; i >= STEP_SIZE; i-- )
+      for ( int i = MAX_VISIBLE_SITHS - 1; i >= NUMBER_OF_SITHS_TO_SCROLL; i-- )
       {
-        moveSithLord( i - STEP_SIZE, i );
+        moveSithLord( i - NUMBER_OF_SITHS_TO_SCROLL, i );
       }
-      loadSithGenealogy( _siths.get( STEP_SIZE ) );
+      loadSithGenealogy( _siths.get( NUMBER_OF_SITHS_TO_SCROLL ) );
       getSithsComputableValue().reportPossiblyChanged();
     }
   }
@@ -116,7 +116,7 @@ public abstract class SithTrackerModel
     }
     else
     {
-      final Sith sith = getSiths().get( ENTRY_COUNT - 1 );
+      final Sith sith = getSiths().get( MAX_VISIBLE_SITHS - 1 );
       return null != sith && null != sith.getApprenticeId();
     }
   }
@@ -126,15 +126,15 @@ public abstract class SithTrackerModel
   {
     if ( canScrollDown() )
     {
-      for ( int i = 0; i < STEP_SIZE; i++ )
+      for ( int i = 0; i < NUMBER_OF_SITHS_TO_SCROLL; i++ )
       {
         clearSithLordAt( i );
       }
-      for ( int i = STEP_SIZE; i < ENTRY_COUNT; i++ )
+      for ( int i = NUMBER_OF_SITHS_TO_SCROLL; i < MAX_VISIBLE_SITHS; i++ )
       {
-        moveSithLord( i, i - STEP_SIZE );
+        moveSithLord( i, i - NUMBER_OF_SITHS_TO_SCROLL );
       }
-      loadSithGenealogy( _siths.get( ENTRY_COUNT - STEP_SIZE - 1 ) );
+      loadSithGenealogy( _siths.get( MAX_VISIBLE_SITHS - NUMBER_OF_SITHS_TO_SCROLL - 1 ) );
       getSithsComputableValue().reportPossiblyChanged();
     }
   }
