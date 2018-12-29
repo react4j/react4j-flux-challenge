@@ -55,6 +55,10 @@ public abstract class SithTrackerModel
   {
     assert null != _webSocket;
     _webSocket.close();
+    for ( int i = 0; i < MAX_VISIBLE_SITHS; i++ )
+    {
+      clearSithLordAt( i );
+    }
   }
 
   @Memoize
