@@ -1,6 +1,7 @@
 package react4j.sithtracker.model;
 
 import arez.ComputableValue;
+import arez.Disposable;
 import arez.annotations.Action;
 import arez.annotations.ArezComponent;
 import arez.annotations.ComputableValueRef;
@@ -21,6 +22,7 @@ public abstract class SithTrackerModel
 {
   private static final int DARTH_SIDIOUS_ID = 3616;
   private static final int ENTRY_COUNT = 5;
+  private static final int STEP_SIZE = 2;
   private WebSocket _webSocket;
   @Nonnull
   private Planet _currentPlanet = Planet.create( -1, "" );
@@ -54,13 +56,45 @@ public abstract class SithTrackerModel
     _webSocket.close();
   }
 
+  @Memoize
   public boolean canScrollUp()
   {
-    return false;
+    if ( areAnySithOnCurrentPlanet() )
+    {
+      return false;
+    }
+    else
+    {
+      final SithPlaceholder placeholder = _siths.get( 0 );
+      return null != placeholder &&
+             !placeholder.isLoading() &&
+             null != placeholder.getSith().getMasterId();
+    }
   }
 
+  private boolean areAnySithOnCurrentPlanet()
+  {
+    return _siths.stream()
+      .anyMatch( p -> null != p && !p.isLoading() && getCurrentPlanet().getId() == p.getSith().getHomeworld().getId() );
+  }
+
+  @Action
   public void scrollUp()
   {
+    if ( canScrollUp() )
+    {
+      for ( int i = ENTRY_COUNT - STEP_SIZE; i < ENTRY_COUNT; i++ )
+      {
+        Disposable.dispose( _siths.get( i ) );
+        _siths.set( i, null );
+      }
+      for ( int i = ENTRY_COUNT - 1; i >= STEP_SIZE; i-- )
+      {
+        _siths.set( i, _siths.get( i - STEP_SIZE ) );
+        _siths.set( i - STEP_SIZE, null );
+      }
+      loadSithGenealogy( _siths.get( STEP_SIZE ) );
+    }
   }
 
   public boolean canScrollDown()
