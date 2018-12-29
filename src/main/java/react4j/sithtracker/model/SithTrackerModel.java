@@ -66,7 +66,7 @@ public abstract class SithTrackerModel
   @Memoize
   public boolean canScrollUp()
   {
-    if ( areAnySithLordsOnCurrentPlanet() )
+    if ( anySithsOnCurrentPlanet() )
     {
       return false;
     }
@@ -98,7 +98,7 @@ public abstract class SithTrackerModel
   @Memoize
   public boolean canScrollDown()
   {
-    if ( areAnySithLordsOnCurrentPlanet() )
+    if ( anySithsOnCurrentPlanet() )
     {
       return false;
     }
@@ -171,7 +171,7 @@ public abstract class SithTrackerModel
     placeholder.load( () -> loadSithGenealogy( placeholder ) );
   }
 
-  private boolean areAnySithLordsOnCurrentPlanet()
+  private boolean anySithsOnCurrentPlanet()
   {
     return getSiths().stream()
       .anyMatch( sith -> null != sith && getCurrentPlanet().getId() == sith.getHomeworld().getId() );
