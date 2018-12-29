@@ -59,20 +59,20 @@ public abstract class SithTrackerModel
   @Memoize
   public boolean canScrollUp()
   {
-    if ( areAnySithOnCurrentPlanet() )
+    if ( areAnySithLordsOnCurrentPlanet() )
     {
       return false;
     }
     else
     {
-      final Sith sith = getSithWindow().get( 0 );
+      final Sith sith = getSiths().get( 0 );
       return null != sith && null != sith.getMasterId();
     }
   }
 
-  private boolean areAnySithOnCurrentPlanet()
+  private boolean areAnySithLordsOnCurrentPlanet()
   {
-    return getSithWindow().stream()
+    return getSiths().stream()
       .anyMatch( sith -> null != sith && getCurrentPlanet().getId() == sith.getHomeworld().getId() );
   }
 
@@ -83,23 +83,23 @@ public abstract class SithTrackerModel
     {
       for ( int i = ENTRY_COUNT - STEP_SIZE; i < ENTRY_COUNT; i++ )
       {
-        clearSith( i );
+        clearSithLordAt( i );
       }
       for ( int i = ENTRY_COUNT - 1; i >= STEP_SIZE; i-- )
       {
-        moveSith( i - STEP_SIZE, i );
+        moveSithLord( i - STEP_SIZE, i );
       }
       loadSithGenealogy( _siths.get( STEP_SIZE ) );
     }
   }
 
-  private void clearSith( final int index )
+  private void clearSithLordAt( final int index )
   {
     Disposable.dispose( _siths.get( index ) );
     _siths.set( index, null );
   }
 
-  private void moveSith( final int fromIndex, final int toIndex )
+  private void moveSithLord( final int fromIndex, final int toIndex )
   {
     _siths.set( toIndex, _siths.get( fromIndex ) );
     _siths.set( fromIndex, null );
@@ -108,13 +108,13 @@ public abstract class SithTrackerModel
   @Memoize
   public boolean canScrollDown()
   {
-    if ( areAnySithOnCurrentPlanet() )
+    if ( areAnySithLordsOnCurrentPlanet() )
     {
       return false;
     }
     else
     {
-      final Sith sith = getSithWindow().get( ENTRY_COUNT - 1 );
+      final Sith sith = getSiths().get( ENTRY_COUNT - 1 );
       return null != sith && null != sith.getApprenticeId();
     }
   }
@@ -126,11 +126,11 @@ public abstract class SithTrackerModel
     {
       for ( int i = 0; i < STEP_SIZE; i++ )
       {
-        clearSith( i );
+        clearSithLordAt( i );
       }
       for ( int i = STEP_SIZE; i < ENTRY_COUNT; i++ )
       {
-        moveSith( i, i - STEP_SIZE );
+        moveSithLord( i, i - STEP_SIZE );
       }
       loadSithGenealogy( _siths.get( ENTRY_COUNT - STEP_SIZE - 1 ) );
     }
@@ -138,13 +138,13 @@ public abstract class SithTrackerModel
 
   @Memoize( depType = DepType.AREZ_OR_EXTERNAL )
   @Nonnull
-  public List<Sith> getSithWindow()
+  public List<Sith> getSiths()
   {
     return _siths.stream().map( e -> null == e || e.isLoading() ? null : e.getSith() ).collect( Collectors.toList() );
   }
 
   @ComputableValueRef
-  abstract ComputableValue getSithWindowComputableValue();
+  abstract ComputableValue getSithsComputableValue();
 
   @Memoize( depType = DepType.AREZ_OR_EXTERNAL )
   @Nonnull
@@ -177,7 +177,7 @@ public abstract class SithTrackerModel
     final int position = _siths.indexOf( placeholder );
     if ( -1 != position )
     {
-      getSithWindowComputableValue().reportPossiblyChanged();
+      getSithsComputableValue().reportPossiblyChanged();
       final Sith sith = placeholder.getSith();
       final Integer masterId = sith.getMasterId();
       if ( null != masterId && position > 0 && null == _siths.get( position - 1 ) )
