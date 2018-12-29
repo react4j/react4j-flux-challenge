@@ -1,6 +1,5 @@
 package react4j.sithtracker;
 
-import arez.spytools.browser.react4j.ReactArezSpyUtil;
 import com.google.gwt.core.client.EntryPoint;
 import elemental2.dom.DomGlobal;
 import react4j.dom.ReactDOM;
@@ -12,7 +11,9 @@ public class App
   @Override
   public void onModuleLoad()
   {
-    ReactArezSpyUtil.enableSpyEventLogging();
+    // Uncomment this line for more detailed event logging
+    //ReactArezSpyUtil.enableSpyEventLogging();
+
     // TODO: Having to add the next line feels super bad. Other frameworks (VueJS/Angular2+)
     // combine the next two steps with the instance render and injection setup combined
     SithTrackerComponent.create();
