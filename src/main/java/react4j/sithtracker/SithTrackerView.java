@@ -1,13 +1,11 @@
 package react4j.sithtracker;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import react4j.ReactNode;
 import react4j.annotations.ReactComponent;
 import react4j.arez.ReactArezComponent;
 import react4j.dom.proptypes.html.HtmlProps;
-import react4j.sithtracker.model.Sith;
 import react4j.sithtracker.model.SithTrackerModel;
 import static react4j.dom.DOM.*;
 
@@ -27,9 +25,7 @@ public abstract class SithTrackerView
                      h1( new HtmlProps().className( "css-planet-monitor" ),
                          "Obi-Wan currently on " + _model.getCurrentPlanet().getName() ),
                      section( new HtmlProps().className( "css-scrollable-list" ),
-                              ul( new HtmlProps().className( "css-slots" ),
-                                  fragment( _model.getSithWindow().stream().map( this::renderSith ) )
-                              ),
+                              ul( new HtmlProps().className( "css-slots" ), SithListViewBuilder.build() ),
                               div( new HtmlProps().className( "css-scroll-buttons" ),
                                    ScrollButtonBuilder
                                      .className( "up" )
@@ -43,11 +39,5 @@ public abstract class SithTrackerView
                      )
                 )
     );
-  }
-
-  @Nonnull
-  private ReactNode renderSith( @Nullable final Sith sith )
-  {
-    return null == sith ? SithViewBuilder.sith( null ) : SithViewBuilder.key( sith.getId() ).sith( sith );
   }
 }
