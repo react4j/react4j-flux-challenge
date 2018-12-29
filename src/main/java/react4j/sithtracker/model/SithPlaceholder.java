@@ -9,6 +9,7 @@ import elemental2.dom.Response;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import jsinterop.base.Any;
 import jsinterop.base.Js;
 import jsinterop.base.JsPropertyMap;
 
@@ -73,8 +74,9 @@ abstract class SithPlaceholder
         setSith( new Sith( _id,
                            data.getAny( "name" ).asString(),
                            data.getAny( "homeworld" ).cast(),
-                           data.getAny( "master" ).asPropertyMap().getAny( "id" ).asInt(),
-                           data.getAny( "apprentice" ).asPropertyMap().getAny( "id" ).asInt() ) );
+                           maybeInt( data.getAny( "master" ).asPropertyMap().getAny( "id" ) ),
+                           // When sith has no apprentice, the apprentice object is still returned but the id is null
+                           maybeInt( data.getAny( "apprentice" ).asPropertyMap().getAny( "id" ) ) ) );
         onLoadComplete.call();
         return null;
       } )
@@ -82,5 +84,11 @@ abstract class SithPlaceholder
         DomGlobal.console.log( "Error loading sith " + getId(), error );
         return null;
       } );
+  }
+
+  @Nullable
+  private Integer maybeInt( @Nullable final Any any )
+  {
+    return null == any ? null : any.asInt();
   }
 }
