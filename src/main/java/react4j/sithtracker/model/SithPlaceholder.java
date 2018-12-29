@@ -3,6 +3,7 @@ package react4j.sithtracker.model;
 import arez.SafeProcedure;
 import arez.annotations.ArezComponent;
 import arez.annotations.ComponentId;
+import arez.annotations.Feature;
 import arez.annotations.Observable;
 import arez.annotations.PreDispose;
 import elemental2.dom.DomGlobal;
@@ -14,7 +15,7 @@ import jsinterop.base.Js;
 import jsinterop.base.JsPropertyMap;
 import react4j.sithtracker.api.AbortController;
 
-@ArezComponent
+@ArezComponent( disposeTrackable = Feature.DISABLE )
 abstract class SithPlaceholder
 {
   private final int _id;
