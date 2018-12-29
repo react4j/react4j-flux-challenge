@@ -11,8 +11,6 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import jsinterop.base.Any;
-import jsinterop.base.Js;
-import jsinterop.base.JsPropertyMap;
 
 @ArezComponent
 abstract class SithPlaceholder
@@ -84,16 +82,9 @@ abstract class SithPlaceholder
     // Is it not present in Elemental2?
     DomGlobal
       .fetch( "http://localhost:3000/dark-jedis/" + getId() )
-      .then( Response::json )
+      .then( Response::text )
       .then( v -> {
-        final JsPropertyMap<Object> data = Js.asPropertyMap( v );
-        setSith( new Sith( _id,
-                           data.getAny( "name" ).asString(),
-                           data.getAny( "homeworld" ).cast(),
-                           // When sith has no master, the master object is still returned but the id is null
-                           maybeInt( data.getAny( "master" ).asPropertyMap().getAny( "id" ) ),
-                           // When sith has no apprentice, the apprentice object is still returned but the id is null
-                           maybeInt( data.getAny( "apprentice" ).asPropertyMap().getAny( "id" ) ) ) );
+        setSith( Sith.parse( v ) );
         onLoadComplete.call();
         //TODO: Clear abort controller here
         return null;

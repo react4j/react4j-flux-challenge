@@ -1,61 +1,59 @@
 package react4j.sithtracker.model;
 
-import java.util.Objects;
+import elemental2.core.Global;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
-//TODO: Sith should be @JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" ) now that it is no longer reactive
+@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" )
 public final class Sith
 {
-  private final int _id;
-  @Nonnull
-  private final String _name;
-  @Nonnull
-  private final Planet _homeworld;
-  @Nullable
-  private final Integer _masterId;
-  @Nullable
-  private final Integer _apprenticeId;
+  private int id;
+  private String name;
+  private Planet homeworld;
+  private SithReference master;
+  private SithReference apprentice;
 
-  public Sith( final int id,
-               @Nonnull final String name,
-               @Nonnull final Planet homeworld,
-               @Nullable final Integer masterId,
-               @Nullable final Integer apprenticeId )
+  @JsOverlay
+  @Nonnull
+  public static Sith parse( @Nonnull final String jsonData )
   {
-    _id = id;
-    _name = Objects.requireNonNull( name );
-    _homeworld = Objects.requireNonNull( homeworld );
-    _masterId = masterId;
-    _apprenticeId = apprenticeId;
+    return (Sith) Global.JSON.parse( jsonData );
   }
 
+  @JsOverlay
   public int getId()
   {
-    return _id;
+    return id;
   }
 
+  @JsOverlay
   @Nonnull
   public String getName()
   {
-    return _name;
+    return name;
   }
 
+  @JsOverlay
   @Nonnull
   public Planet getHomeworld()
   {
-    return _homeworld;
+    return homeworld;
   }
 
+  @JsOverlay
   @Nullable
-  public Integer getMasterId()
+  public Double getMasterId()
   {
-    return _masterId;
+    return master.getId();
   }
 
+  @JsOverlay
   @Nullable
-  public Integer getApprenticeId()
+  public Double getApprenticeId()
   {
-    return _apprenticeId;
+    return apprentice.getId();
   }
 }

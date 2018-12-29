@@ -151,15 +151,15 @@ public abstract class SithTrackerModel
     {
       getSithsComputableValue().reportPossiblyChanged();
       final Sith sith = placeholder.getSith();
-      final Integer masterId = sith.getMasterId();
+      final Double masterId = sith.getMasterId();
       if ( null != masterId && position > 0 && null == _siths.get( position - 1 ) )
       {
-        loadSith( masterId, position - 1 );
+        loadSith( masterId.intValue(), position - 1 );
       }
-      final Integer apprenticeId = sith.getApprenticeId();
+      final Double apprenticeId = sith.getApprenticeId();
       if ( null != apprenticeId && position < 4 && null == _siths.get( position + 1 ) )
       {
-        loadSith( apprenticeId, position + 1 );
+        loadSith( apprenticeId.intValue(), position + 1 );
       }
     }
   }
