@@ -105,13 +105,35 @@ public abstract class SithTrackerModel
     _siths.set( fromIndex, null );
   }
 
+  @Memoize
   public boolean canScrollDown()
   {
-    return false;
+    if ( areAnySithOnCurrentPlanet() )
+    {
+      return false;
+    }
+    else
+    {
+      final Sith sith = getSithWindow().get( ENTRY_COUNT - 1 );
+      return null != sith && null != sith.getApprenticeId();
+    }
   }
 
+  @Action
   public void scrollDown()
   {
+    if ( canScrollDown() )
+    {
+      for ( int i = 0; i < STEP_SIZE; i++ )
+      {
+        clearSith( i );
+      }
+      for ( int i = STEP_SIZE; i < ENTRY_COUNT; i++ )
+      {
+        moveSith( i, i - STEP_SIZE );
+      }
+      loadSithGenealogy( _siths.get( ENTRY_COUNT - STEP_SIZE - 1 ) );
+    }
   }
 
   @Memoize( depType = DepType.AREZ_OR_EXTERNAL )
