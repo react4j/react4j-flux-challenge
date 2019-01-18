@@ -3,16 +3,16 @@ package react4j.sithtracker.dagger;
 import dagger.Component;
 import javax.inject.Singleton;
 import react4j.sithtracker.model.SithTrackerModelDaggerModule;
-import react4j.sithtracker.views.SithListViewDaggerFactory;
-import react4j.sithtracker.views.SithTrackerViewDaggerFactory;
-import react4j.sithtracker.views.SithViewDaggerFactory;
+import react4j.sithtracker.views.SithListViewDaggerComponentExtension;
+import react4j.sithtracker.views.SithTrackerViewDaggerComponentExtension;
+import react4j.sithtracker.views.SithViewDaggerComponentExtension;
 
 @Singleton
 @Component( modules = { SithTrackerModelDaggerModule.class } )
 public interface SithTrackerComponent
-  extends SithTrackerViewDaggerFactory,
-          SithListViewDaggerFactory,
-          SithViewDaggerFactory
+  extends SithTrackerViewDaggerComponentExtension,
+          SithListViewDaggerComponentExtension,
+          SithViewDaggerComponentExtension
 {
   static SithTrackerComponent create()
   {
