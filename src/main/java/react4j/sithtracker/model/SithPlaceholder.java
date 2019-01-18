@@ -6,6 +6,7 @@ import arez.annotations.ComponentId;
 import arez.annotations.Feature;
 import arez.annotations.Observable;
 import arez.annotations.PreDispose;
+import elemental2.dom.DOMException;
 import elemental2.dom.DomGlobal;
 import elemental2.dom.Response;
 import java.util.Objects;
@@ -94,9 +95,17 @@ abstract class SithPlaceholder
         return null;
       } )
       .catch_( error -> {
-        DomGlobal.console.log( "Error loading sith " + getId(), error );
-        _abortController = null;
+        if ( !isAbortError( error ) )
+        {
+          DomGlobal.console.log( "Error loading sith " + getId(), error );
+          _abortController = null;
+        }
         return null;
       } );
+  }
+
+  private boolean isAbortError( final Object error )
+  {
+    return error instanceof DOMException && 20 == ( (DOMException) error ).code;
   }
 }
