@@ -179,8 +179,9 @@ public abstract class SithTrackerModel
 
   private void clearSithLordAt( final int index )
   {
-    Disposable.dispose( _siths.get( index ) );
+    final SithPlaceholder placeholder = _siths.get( index );
     _siths.set( index, null );
+    Disposable.dispose( placeholder );
   }
 
   private void moveSithLord( final int fromIndex, final int toIndex )
