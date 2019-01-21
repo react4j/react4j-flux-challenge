@@ -6,15 +6,14 @@ import arez.annotations.ComponentId;
 import arez.annotations.Feature;
 import arez.annotations.Observable;
 import arez.annotations.PreDispose;
+import elemental2.dom.AbortController;
 import elemental2.dom.DOMException;
 import elemental2.dom.DomGlobal;
+import elemental2.dom.RequestInit;
 import elemental2.dom.Response;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import jsinterop.base.Js;
-import jsinterop.base.JsPropertyMap;
-import react4j.sithtracker.api.AbortController;
 
 @ArezComponent( disposeTrackable = Feature.DISABLE )
 abstract class SithPlaceholder
@@ -50,7 +49,7 @@ abstract class SithPlaceholder
   {
     if ( null != _abortController )
     {
-      _abortController.abort();
+      _abortController.abort.onInvoke();
     }
   }
 
@@ -84,9 +83,10 @@ abstract class SithPlaceholder
   void load( @Nonnull SafeProcedure onLoadComplete )
   {
     _abortController = new AbortController();
+    final RequestInit init = RequestInit.create();
+    init.setSignal( _abortController.signal );
     DomGlobal
-      .fetch( "http://localhost:3000/dark-jedis/" + getId(),
-              Js.cast( JsPropertyMap.of( "signal", _abortController.signal ) ) )
+      .fetch( "http://localhost:3000/dark-jedis/" + getId(), init )
       .then( Response::text )
       .then( v -> {
         _abortController = null;
