@@ -1,6 +1,5 @@
 package react4j.sithtracker.views;
 
-import arez.Arez;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import react4j.ReactNode;
@@ -13,7 +12,7 @@ import react4j.sithtracker.model.Sith;
 import react4j.sithtracker.model.SithTrackerModel;
 import static react4j.dom.DOM.*;
 
-@ReactComponent
+@ReactComponent( allowNoArezDeps = true )
 public abstract class SithView
   extends ReactArezComponent
 {
@@ -28,9 +27,6 @@ public abstract class SithView
   @Override
   protected ReactNode render()
   {
-    //TODO: Add a fake observe until can tell react4j that it is okay if no observe
-    Arez.context().observable().reportObserved();
-
     final Sith sith = sith();
     if ( null != sith )
     {
