@@ -43,11 +43,7 @@ public abstract class SithTrackerModel
   final void postConstruct()
   {
     _webSocket = new WebSocket( "ws://localhost:4000" );
-    _webSocket.onmessage = msg -> {
-      setCurrentPlanet( Planet.parse( String.valueOf( msg.data ) ) );
-      //TODO: Why does elemental2 define a return type here?
-      return null;
-    };
+    _webSocket.onmessage = msg -> setCurrentPlanet( Planet.parse( String.valueOf( msg.data ) ) );
     loadSith( DARTH_SIDIOUS_ID, 2 );
     setCurrentPlanet( Planet.create( -1, "" ) );
   }
