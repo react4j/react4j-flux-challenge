@@ -14,6 +14,9 @@ import elemental2.dom.Response;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
+import jsinterop.base.Js;
 
 @ArezComponent( disposeTrackable = Feature.DISABLE )
 abstract class SithPlaceholder
@@ -45,11 +48,21 @@ abstract class SithPlaceholder
     cancelLoading();
   }
 
+  @JsType(name = "AbortController", isNative = true, namespace = JsPackage.GLOBAL)
+  public static class AbortControllerEx {
+    native void abort();
+  }
+
   private void cancelLoading()
   {
     if ( null != _abortController )
     {
-      _abortController.abort.onInvoke();
+      // TODO: Fix this
+      // GWT2 compiles this as this._abortController.abort.call(null); which generates an error
+      // Perhaps we should patch closure annotation to make abort into a function and make it return undefined
+      //_abortController.abort.onInvoke();
+      Js.<AbortControllerEx>cast( _abortController ).abort();
+      _abortController = null;
     }
   }
 
