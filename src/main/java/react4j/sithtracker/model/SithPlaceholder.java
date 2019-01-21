@@ -48,20 +48,11 @@ abstract class SithPlaceholder
     cancelLoading();
   }
 
-  @JsType(name = "AbortController", isNative = true, namespace = JsPackage.GLOBAL)
-  public static class AbortControllerEx {
-    native void abort();
-  }
-
   private void cancelLoading()
   {
     if ( null != _abortController )
     {
-      // TODO: Fix this
-      // GWT2 compiles this as this._abortController.abort.call(null); which generates an error
-      // Perhaps we should patch closure annotation to make abort into a function and make it return undefined
-      //_abortController.abort.onInvoke();
-      Js.<AbortControllerEx>cast( _abortController ).abort();
+      _abortController.abort();
       _abortController = null;
     }
   }
