@@ -68,8 +68,8 @@ public abstract class SithTrackerModel
     }
     else
     {
-      final Sith sith = getSiths().get( 0 );
-      return null != sith && null != sith.getMasterId();
+      final SithModel sith = getSiths().get( 0 );
+      return null != sith && null != sith.getData().getMasterId();
     }
   }
 
@@ -100,8 +100,8 @@ public abstract class SithTrackerModel
     }
     else
     {
-      final Sith sith = getSiths().get( MAX_VISIBLE_SITHS - 1 );
-      return null != sith && null != sith.getApprenticeId();
+      final SithModel sith = getSiths().get( MAX_VISIBLE_SITHS - 1 );
+      return null != sith && null != sith.getData().getApprenticeId();
     }
   }
 
@@ -125,7 +125,7 @@ public abstract class SithTrackerModel
 
   @Memoize( depType = DepType.AREZ_OR_EXTERNAL )
   @Nonnull
-  public List<Sith> getSiths()
+  public List<SithModel> getSiths()
   {
     return _siths.stream().map( e -> null == e || e.isLoading() ? null : e.getSith() ).collect( Collectors.toList() );
   }
@@ -146,7 +146,8 @@ public abstract class SithTrackerModel
     if ( -1 != position )
     {
       getSithsComputableValue().reportPossiblyChanged();
-      final Sith sith = placeholder.getSith();
+      final SithModel model = placeholder.getSith();
+      final Sith sith = model.getData();
       final Double masterId = sith.getMasterId();
       if ( null != masterId && position > 0 && null == _siths.get( position - 1 ) )
       {
@@ -170,7 +171,7 @@ public abstract class SithTrackerModel
   private boolean anySithsOnCurrentPlanet()
   {
     return getSiths().stream()
-      .anyMatch( sith -> null != sith && getCurrentPlanet().getId() == sith.getHomeworld().getId() );
+      .anyMatch( sith -> null != sith && getCurrentPlanet().getId() == sith.getData().getHomeworld().getId() );
   }
 
   private void clearSithLordAt( final int index )

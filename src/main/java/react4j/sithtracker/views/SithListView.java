@@ -6,7 +6,6 @@ import javax.annotation.Nullable;
 import react4j.Component;
 import react4j.ReactNode;
 import react4j.annotations.ReactComponent;
-import react4j.sithtracker.model.Sith;
 import react4j.sithtracker.model.SithTrackerModel;
 import static react4j.dom.DOM.*;
 
@@ -26,12 +25,6 @@ public abstract class SithListView
   @Override
   protected ReactNode render()
   {
-    return fragment( _model.getSiths().stream().map( this::renderSith ) );
-  }
-
-  @Nonnull
-  private ReactNode renderSith( @Nullable final Sith sith )
-  {
-    return null == sith ? SithViewBuilder.sith( null ) : SithViewBuilder.key( sith.getId() ).sith( sith );
+    return fragment( _model.getSiths().stream().map( SithViewBuilder::sith ) );
   }
 }

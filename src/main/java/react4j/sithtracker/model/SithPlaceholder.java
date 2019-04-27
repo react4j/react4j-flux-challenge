@@ -14,15 +14,12 @@ import elemental2.dom.Response;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
-import jsinterop.base.Js;
 
 @ArezComponent( disposeNotifier = Feature.DISABLE )
 abstract class SithPlaceholder
 {
   private final int _id;
-  private Sith _sith;
+  private SithModel _sith;
   private AbortController _abortController;
 
   @Nonnull
@@ -64,21 +61,21 @@ abstract class SithPlaceholder
   }
 
   @Nonnull
-  Sith getSith()
+  SithModel getSith()
   {
-    final Sith sith = sith();
+    final SithModel sith = sith();
     assert null != sith;
     return sith;
   }
 
   @Observable( writeOutsideTransaction = true )
   @Nullable
-  Sith sith()
+  SithModel sith()
   {
     return _sith;
   }
 
-  void setSith( @Nonnull final Sith sith )
+  void setSith( @Nonnull final SithModel sith )
   {
     assert null == _sith;
     _sith = Objects.requireNonNull( sith );
@@ -94,7 +91,7 @@ abstract class SithPlaceholder
       .then( Response::text )
       .then( v -> {
         _abortController = null;
-        setSith( Sith.parse( v ) );
+        setSith( new SithModel( Sith.parse( v ) ) );
         onLoadComplete.call();
         return null;
       } )
