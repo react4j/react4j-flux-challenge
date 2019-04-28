@@ -35,11 +35,11 @@ public abstract class SithTrackerView
                               div( new HtmlProps().className( "css-scroll-buttons" ),
                                    ScrollButtonBuilder
                                      .className( "up" )
-                                     .onClick( () -> _model.scrollUp() )
+                                     .onClick( _model::scrollUp )
                                      .enabled( _model.canScrollUp() ),
                                    ScrollButtonBuilder
                                      .className( "down" )
-                                     .onClick( () -> _model.scrollDown() )
+                                     .onClick( _model::scrollDown )
                                      .enabled( _model.canScrollDown() )
                               )
                      )
