@@ -27,7 +27,7 @@ public abstract class SithView
   }
 
   @Prop( immutable = true )
-  @Nullable
+  @Nonnull
   abstract SithModel sith();
 
   @Nullable
@@ -35,20 +35,13 @@ public abstract class SithView
   protected ReactNode render()
   {
     final SithModel sith = sith();
-    if ( null != sith )
-    {
-      final Planet currentPlanet = _model.getCurrentPlanet();
-      final Planet homeworld = sith.getData().getHomeworld();
-      final boolean livesOnCurrentWorld = currentPlanet.getId() == homeworld.getId();
-      return li( new HtmlProps()
-                   .className( "css-slot" )
-                   .style( new CssProps().color( livesOnCurrentWorld ? "red" : null ) ),
-                 h3( sith.getData().getName() ),
-                 h6( "Home world: " + homeworld.getName() ) );
-    }
-    else
-    {
-      return li( new HtmlProps().className( "css-slot" ) );
-    }
+    final Planet currentPlanet = _model.getCurrentPlanet();
+    final Planet homeworld = sith.getData().getHomeworld();
+    final boolean livesOnCurrentWorld = currentPlanet.getId() == homeworld.getId();
+    return li( new HtmlProps()
+                 .className( "css-slot" )
+                 .style( new CssProps().color( livesOnCurrentWorld ? "red" : null ) ),
+               h3( sith.getData().getName() ),
+               h6( "Home world: " + homeworld.getName() ) );
   }
 }

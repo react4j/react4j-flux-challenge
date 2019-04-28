@@ -25,6 +25,15 @@ public abstract class SithListView
   @Override
   protected ReactNode render()
   {
-    return fragment( _model.getSiths().stream().map( SithViewBuilder::sith ) );
+    return fragment( _model.getSiths().stream().map( sith -> {
+      if ( null == sith )
+      {
+        return EmptySithViewBuilder.build();
+      }
+      else
+      {
+        return SithViewBuilder.sith( sith );
+      }
+    } ) );
   }
 }
