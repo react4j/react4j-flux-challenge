@@ -17,7 +17,7 @@ public class App
     //ReactArezSpyUtil.enableSpyEventLogging();
 
     // TODO: Having to add the next line feels super bad. Other frameworks (VueJS/Angular2+)
-    // combine the next two steps with the instance render and injection setup combined
+    // combine initial render and injection in one step.
     SithTrackerComponent.create();
     ReactDOM.render( ReactElement.createStrictMode( SithTrackerViewBuilder.build() ),
                      DomGlobal.document.getElementById( "app" ) );
