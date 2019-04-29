@@ -1,5 +1,7 @@
 package react4j.sithtracker;
 
+import arez.Arez;
+import arez.spytools.browser.react4j.ReactArezSpyUtil;
 import com.google.gwt.core.client.EntryPoint;
 import elemental2.dom.DomGlobal;
 import react4j.ReactElement;
@@ -13,8 +15,10 @@ public class App
   @Override
   public void onModuleLoad()
   {
-    // Uncomment this line for more detailed event logging
-    //ReactArezSpyUtil.enableSpyEventLogging();
+    if ( Arez.areSpiesEnabled() )
+    {
+      ReactArezSpyUtil.enableSpyEventLogging();
+    }
 
     // TODO: Having to add the next line feels super bad. Other frameworks (VueJS/Angular2+)
     // combine initial render and injection in one step.
