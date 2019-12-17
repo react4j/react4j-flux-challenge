@@ -68,7 +68,7 @@ abstract class SithPlaceholder
     return sith;
   }
 
-  @Observable( writeOutsideTransaction = true )
+  @Observable( writeOutsideTransaction = Feature.ENABLE )
   @Nullable
   SithModel sith()
   {

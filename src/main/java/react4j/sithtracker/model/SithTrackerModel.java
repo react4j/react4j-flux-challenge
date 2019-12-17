@@ -133,7 +133,7 @@ public abstract class SithTrackerModel
   @ComputableValueRef
   abstract ComputableValue getSithsComputableValue();
 
-  @Observable( writeOutsideTransaction = true, initializer = Feature.DISABLE )
+  @Observable( writeOutsideTransaction = Feature.ENABLE, initializer = Feature.DISABLE )
   @Nonnull
   public abstract Planet getCurrentPlanet();
 
