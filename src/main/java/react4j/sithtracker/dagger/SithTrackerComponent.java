@@ -3,23 +3,27 @@ package react4j.sithtracker.dagger;
 import dagger.Component;
 import javax.inject.Singleton;
 import react4j.sithtracker.model.SithTrackerModelDaggerModule;
-import react4j.sithtracker.views.SithListViewDaggerComponentExtension;
-import react4j.sithtracker.views.SithTrackerViewDaggerComponentExtension;
-import react4j.sithtracker.views.SithViewDaggerComponentExtension;
+import react4j.sithtracker.views.SithListViewFactory;
+import react4j.sithtracker.views.SithTrackerViewFactory;
+import react4j.sithtracker.views.SithViewFactory;
 
+@SuppressWarnings( "UnusedReturnValue" )
 @Singleton
 @Component( modules = SithTrackerModelDaggerModule.class )
 public interface SithTrackerComponent
-  extends SithTrackerViewDaggerComponentExtension,
-          SithListViewDaggerComponentExtension,
-          SithViewDaggerComponentExtension
 {
+  SithTrackerViewFactory sithTrackerViewFactory();
+
+  SithListViewFactory sithListViewFactory();
+
+  SithViewFactory sithViewFactory();
+
   static SithTrackerComponent create()
   {
     final SithTrackerComponent component = DaggerSithTrackerComponent.create();
-    component.bindSithTrackerView();
-    component.bindSithListView();
-    component.bindSithView();
+    component.sithTrackerViewFactory();
+    component.sithListViewFactory();
+    component.sithViewFactory();
     return component;
   }
 }
