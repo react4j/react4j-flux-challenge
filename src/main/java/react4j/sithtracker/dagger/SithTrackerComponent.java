@@ -8,7 +8,7 @@ import react4j.sithtracker.views.SithTrackerViewDaggerComponentExtension;
 import react4j.sithtracker.views.SithViewDaggerComponentExtension;
 
 @Singleton
-@Component( modules = { SithTrackerModelDaggerModule.class } )
+@Component( modules = SithTrackerModelDaggerModule.class )
 public interface SithTrackerComponent
   extends SithTrackerViewDaggerComponentExtension,
           SithListViewDaggerComponentExtension,
