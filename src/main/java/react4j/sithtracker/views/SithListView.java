@@ -10,7 +10,7 @@ import react4j.sithtracker.model.SithTrackerModel;
 import static react4j.dom.DOM.*;
 
 @ReactComponent( type = ReactComponent.Type.TRACKING )
-public abstract class SithListView
+abstract class SithListView
   extends Component
 {
   @Nonnull

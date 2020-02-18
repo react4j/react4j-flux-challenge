@@ -8,7 +8,7 @@ import react4j.dom.proptypes.html.HtmlProps;
 import static react4j.dom.DOM.*;
 
 @ReactComponent( type = ReactComponent.Type.STATEFUL )
-public abstract class EmptySithView
+abstract class EmptySithView
   extends Component
 {
   @Nullable

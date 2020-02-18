@@ -17,10 +17,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.inject.Singleton;
 
-@Singleton
-@ArezComponent
+@ArezComponent( service = Feature.ENABLE )
 public abstract class SithTrackerModel
 {
   private static final int DARTH_SIDIOUS_ID = 3616;

@@ -11,7 +11,7 @@ import react4j.dom.proptypes.html.BtnProps;
 import static react4j.dom.DOM.*;
 
 @ReactComponent
-public abstract class ScrollButton
+abstract class ScrollButton
   extends Component
 {
   @Prop

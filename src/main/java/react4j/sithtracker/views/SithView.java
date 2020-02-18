@@ -15,7 +15,7 @@ import react4j.sithtracker.model.SithTrackerModel;
 import static react4j.dom.DOM.*;
 
 @ReactComponent( type = ReactComponent.Type.MAYBE_TRACKING )
-public abstract class SithView
+abstract class SithView
   extends Component
 {
   @Nonnull
