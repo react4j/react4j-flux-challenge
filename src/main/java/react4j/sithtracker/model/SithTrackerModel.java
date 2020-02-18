@@ -131,7 +131,7 @@ public abstract class SithTrackerModel
   }
 
   @ComputableValueRef
-  abstract ComputableValue getSithsComputableValue();
+  abstract ComputableValue<?> getSithsComputableValue();
 
   @Observable( writeOutsideTransaction = Feature.ENABLE, initializer = Feature.DISABLE )
   @Nonnull
