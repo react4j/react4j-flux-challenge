@@ -1,6 +1,6 @@
 # React4j Flux Challenge implementation
 
-[![Build Status](https://secure.travis-ci.org/react4j/react4j-flux-challenge.png?branch=master)](http://travis-ci.org/react4j/react4j-flux-challenge)
+[![Build Status](https://api.travis-ci.com/react4j/react4j-flux-challenge.png?branch=master)](http://travis-ci.org/react4j/react4j-flux-challenge)
 
 An solution for the problem presented in the [flux challenge](https://github.com/staltz/flux-challenge). The
 implementation uses Arez and React4j. The source code has been vendored into this repository and the original
