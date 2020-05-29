@@ -27,7 +27,7 @@ public abstract class SithTrackerModel
   @Nullable
   private WebSocket _webSocket;
   @Nonnull
-  private final ArrayList<SithPlaceholder> _siths = new ArrayList<>( MAX_VISIBLE_SITHS );
+  private final List<SithPlaceholder> _siths = new ArrayList<>( MAX_VISIBLE_SITHS );
 
   SithTrackerModel()
   {
