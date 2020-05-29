@@ -36,13 +36,13 @@ abstract class SithPlaceholder
   }
 
   @ComponentId
-  final int getId()
+  int getId()
   {
     return _id;
   }
 
   @PreDispose
-  final void preDispose()
+  void preDispose()
   {
     cancelLoading();
   }

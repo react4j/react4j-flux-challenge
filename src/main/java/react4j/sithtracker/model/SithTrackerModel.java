@@ -38,7 +38,7 @@ public abstract class SithTrackerModel
   }
 
   @PostConstruct
-  final void postConstruct()
+  void postConstruct()
   {
     _webSocket = new WebSocket( "ws://localhost:4000" );
     _webSocket.onmessage = msg -> setCurrentPlanet( Planet.parse( String.valueOf( msg.data ) ) );
@@ -47,7 +47,7 @@ public abstract class SithTrackerModel
   }
 
   @PreDispose
-  final void preDispose()
+  void preDispose()
   {
     assert null != _webSocket;
     _webSocket.close();
