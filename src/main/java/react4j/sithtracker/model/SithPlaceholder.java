@@ -19,7 +19,9 @@ import javax.annotation.Nullable;
 abstract class SithPlaceholder
 {
   private final int _id;
+  @Nullable
   private SithModel _sith;
+  @Nullable
   private AbortController _abortController;
 
   @Nonnull
