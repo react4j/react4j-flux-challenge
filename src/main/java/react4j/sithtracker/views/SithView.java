@@ -2,11 +2,10 @@ package react4j.sithtracker.views;
 
 import java.util.Objects;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import react4j.Component;
 import react4j.ReactNode;
 import react4j.annotations.Prop;
 import react4j.annotations.ReactComponent;
+import react4j.annotations.Render;
 import react4j.dom.proptypes.html.CssProps;
 import react4j.dom.proptypes.html.HtmlProps;
 import react4j.sithtracker.model.Planet;
@@ -16,7 +15,6 @@ import static react4j.dom.DOM.*;
 
 @ReactComponent( type = ReactComponent.Type.MAYBE_TRACKING )
 abstract class SithView
-  extends Component
 {
   @Nonnull
   private final SithTrackerModel _model;
@@ -30,9 +28,9 @@ abstract class SithView
   @Nonnull
   abstract SithModel sith();
 
-  @Nullable
-  @Override
-  protected ReactNode render()
+  @Nonnull
+  @Render
+  ReactNode render()
   {
     final SithModel sith = sith();
     final Planet currentPlanet = _model.getCurrentPlanet();

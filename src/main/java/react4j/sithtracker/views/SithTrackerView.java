@@ -2,17 +2,15 @@ package react4j.sithtracker.views;
 
 import java.util.Objects;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import react4j.Component;
 import react4j.ReactNode;
 import react4j.annotations.ReactComponent;
+import react4j.annotations.Render;
 import react4j.dom.proptypes.html.HtmlProps;
 import react4j.sithtracker.model.SithTrackerModel;
 import static react4j.dom.DOM.*;
 
 @ReactComponent( type = ReactComponent.Type.TRACKING )
 public abstract class SithTrackerView
-  extends Component
 {
   @Nonnull
   private final SithTrackerModel _model;
@@ -22,9 +20,9 @@ public abstract class SithTrackerView
     _model = Objects.requireNonNull( model );
   }
 
-  @Nullable
-  @Override
-  protected ReactNode render()
+  @Nonnull
+  @Render
+  ReactNode render()
   {
     return div( new HtmlProps().className( "app-container" ),
                 div( new HtmlProps().className( "css-root" ),
