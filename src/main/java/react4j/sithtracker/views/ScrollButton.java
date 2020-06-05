@@ -3,7 +3,7 @@ package react4j.sithtracker.views;
 import arez.SafeProcedure;
 import javax.annotation.Nonnull;
 import react4j.ReactNode;
-import react4j.annotations.Prop;
+import react4j.annotations.Input;
 import react4j.annotations.Render;
 import react4j.annotations.View;
 import react4j.dom.proptypes.html.BtnProps;
@@ -12,15 +12,15 @@ import static react4j.dom.DOM.*;
 @View
 abstract class ScrollButton
 {
-  @Prop
+  @Input
   @Nonnull
   abstract String className();
 
-  @Prop
+  @Input
   @Nonnull
   abstract SafeProcedure onClick();
 
-  @Prop
+  @Input
   abstract boolean enabled();
 
   @Nonnull
