@@ -25,6 +25,7 @@ define 'react4j-sithtracker' do
                :elemental2_promise,
                :braincheck,
                :grim_annotations,
+               :zemeckis,
                :react4j_core,
                :react4j_dom,
                :arez_core,
