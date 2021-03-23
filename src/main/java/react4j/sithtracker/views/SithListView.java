@@ -23,15 +23,9 @@ abstract class SithListView
   @Render
   ReactNode render()
   {
-    return fragment( _model.getSiths().stream().map( sith -> {
-      if ( null == sith )
-      {
-        return EmptySithViewBuilder.build();
-      }
-      else
-      {
-        return SithViewBuilder.sith( sith );
-      }
-    } ) );
+    return fragment( _model
+                       .getSiths()
+                       .stream()
+                       .map( sith -> null == sith ? EmptySithViewBuilder.build() : SithViewBuilder.sith( sith ) ) );
   }
 }
