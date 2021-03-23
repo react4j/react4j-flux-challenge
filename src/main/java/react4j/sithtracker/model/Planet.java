@@ -1,6 +1,6 @@
 package react4j.sithtracker.model;
 
-import elemental2.core.Global;
+import akasha.core.JSON;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import jsinterop.annotations.JsOverlay;
@@ -27,7 +27,7 @@ public final class Planet
   @Nonnull
   public static Planet parse( @Nonnull final String jsonData )
   {
-    return (Planet) Global.JSON.parse( jsonData );
+    return Objects.requireNonNull( JSON.parse( jsonData ) ).cast();
   }
 
   @JsOverlay

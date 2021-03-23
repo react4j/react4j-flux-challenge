@@ -1,6 +1,7 @@
 package react4j.sithtracker.model;
 
-import elemental2.core.Global;
+import akasha.core.JSON;
+import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import jsinterop.annotations.JsOverlay;
@@ -21,7 +22,7 @@ public final class Sith
   @Nonnull
   public static Sith parse( @Nonnull final String jsonData )
   {
-    return (Sith) Global.JSON.parse( jsonData );
+    return Objects.requireNonNull( JSON.parse( jsonData ) ).cast();
   }
 
   @JsOverlay

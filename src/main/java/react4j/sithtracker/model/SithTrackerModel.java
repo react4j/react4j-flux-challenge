@@ -11,7 +11,7 @@ import arez.annotations.Memoize;
 import arez.annotations.Observable;
 import arez.annotations.PostConstruct;
 import arez.annotations.PreDispose;
-import elemental2.dom.WebSocket;
+import akasha.WebSocket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,7 +41,7 @@ public abstract class SithTrackerModel
   void postConstruct()
   {
     _webSocket = new WebSocket( "ws://localhost:4000" );
-    _webSocket.onmessage = msg -> setCurrentPlanet( Planet.parse( String.valueOf( msg.data ) ) );
+    _webSocket.onmessage = msg -> setCurrentPlanet( Planet.parse( String.valueOf( msg.data() ) ) );
     loadSith( DARTH_SIDIOUS_ID, 2 );
     setCurrentPlanet( Planet.create( -1, "" ) );
   }

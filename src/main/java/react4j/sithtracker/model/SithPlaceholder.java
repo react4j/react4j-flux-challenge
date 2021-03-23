@@ -1,16 +1,17 @@
 package react4j.sithtracker.model;
 
+import akasha.AbortController;
+import akasha.Console;
+import akasha.DOMException;
+import akasha.Global;
+import akasha.RequestInit;
+import akasha.Response;
 import arez.SafeProcedure;
 import arez.annotations.ArezComponent;
 import arez.annotations.ComponentId;
 import arez.annotations.Feature;
 import arez.annotations.Observable;
 import arez.annotations.PreDispose;
-import elemental2.dom.AbortController;
-import elemental2.dom.DOMException;
-import elemental2.dom.DomGlobal;
-import elemental2.dom.RequestInit;
-import elemental2.dom.Response;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -87,20 +88,19 @@ abstract class SithPlaceholder
   {
     _abortController = new AbortController();
     final RequestInit init = RequestInit.create();
-    init.setSignal( _abortController.signal );
-    DomGlobal
+    init.setSignal( _abortController.signal() );
+    Global
       .fetch( "http://localhost:3000/dark-jedis/" + getId(), init )
       .then( Response::text )
-      .then( v -> {
+      .thenAccept( v -> {
         _abortController = null;
         setSith( new SithModel( Sith.parse( v ) ) );
         onLoadComplete.call();
-        return null;
       } )
       .catch_( error -> {
         if ( !isAbortError( error ) )
         {
-          DomGlobal.console.log( "Error loading sith " + getId(), error );
+          Console.log( "Error loading sith " + getId(), error );
           _abortController = null;
         }
         return null;
@@ -109,6 +109,6 @@ abstract class SithPlaceholder
 
   private boolean isAbortError( final Object error )
   {
-    return error instanceof DOMException && 20 == ( (DOMException) error ).code;
+    return error instanceof DOMException && DOMException.ABORT_ERR == ( (DOMException) error ).code();
   }
 }
