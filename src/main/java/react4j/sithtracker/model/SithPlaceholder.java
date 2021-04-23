@@ -3,9 +3,9 @@ package react4j.sithtracker.model;
 import akasha.AbortController;
 import akasha.Console;
 import akasha.DOMException;
-import akasha.Global;
 import akasha.RequestInit;
 import akasha.Response;
+import akasha.WindowGlobal;
 import arez.SafeProcedure;
 import arez.annotations.ArezComponent;
 import arez.annotations.ComponentId;
@@ -89,7 +89,7 @@ abstract class SithPlaceholder
     _abortController = new AbortController();
     final RequestInit init = RequestInit.create();
     init.setSignal( _abortController.signal() );
-    Global
+    WindowGlobal
       .fetch( "http://localhost:3000/dark-jedis/" + getId(), init )
       .then( Response::text )
       .thenAccept( v -> {

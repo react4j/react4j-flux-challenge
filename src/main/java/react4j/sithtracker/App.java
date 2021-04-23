@@ -1,7 +1,7 @@
 package react4j.sithtracker;
 
 import akasha.Element;
-import akasha.Global;
+import akasha.WindowGlobal;
 import arez.Arez;
 import arez.spytools.browser.react4j.ReactArezSpyUtil;
 import com.google.gwt.core.client.EntryPoint;
@@ -23,7 +23,7 @@ public class App
     // TODO: Having to add the next line feels super bad. Other frameworks (VueJS/Angular2+)
     // combine initial render and injection in one step.
     SithTrackerInjector.create();
-    final Element element = Global.document().getElementById( "app" );
+    final Element element = WindowGlobal.document().getElementById( "app" );
     assert null != element;
     ReactDOM.render( SithTrackerViewBuilder.build(), element );
   }
