@@ -87,10 +87,8 @@ abstract class SithPlaceholder
   void load( @Nonnull SafeProcedure onLoadComplete )
   {
     _abortController = new AbortController();
-    final RequestInit init = RequestInit.create();
-    init.setSignal( _abortController.signal() );
     WindowGlobal
-      .fetch( "http://localhost:3000/dark-jedis/" + getId(), init )
+      .fetch( "http://localhost:3000/dark-jedis/" + getId(), RequestInit.of().signal( _abortController.signal() ) )
       .then( Response::text )
       .thenAccept( v -> {
         _abortController = null;
