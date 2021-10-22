@@ -23,7 +23,7 @@ public final class SithModel
 
   @Nonnull
   @Override
-  public final String getKey()
+  public String getKey()
   {
     return String.valueOf( _data.getId() );
   }
