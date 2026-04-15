@@ -18,28 +18,26 @@ abstract class SithView
 {
   @Nonnull
   private final SithTrackerModel _model;
+  @Nonnull
+  private final SithModel _sith;
 
-  SithView( @Nonnull final SithTrackerModel model )
+  SithView( @Nonnull final SithTrackerModel model, @Nonnull @Input( immutable = true ) final SithModel sith )
   {
     _model = Objects.requireNonNull( model );
+    _sith = Objects.requireNonNull( sith );
   }
-
-  @Input( immutable = true )
-  @Nonnull
-  abstract SithModel sith();
 
   @Nonnull
   @Render
   ReactNode render()
   {
-    final SithModel sith = sith();
     final Planet currentPlanet = _model.getCurrentPlanet();
-    final Planet homeworld = sith.getData().getHomeworld();
+    final Planet homeworld = _sith.getData().getHomeworld();
     final boolean livesOnCurrentWorld = currentPlanet.getId() == homeworld.getId();
     return li( new HtmlProps()
                  .className( "css-slot" )
                  .style( new CssProps().color( livesOnCurrentWorld ? "red" : null ) ),
-               h3( sith.getData().getName() ),
+               h3( _sith.getData().getName() ),
                h6( "Home world: " + homeworld.getName() ) );
   }
 }
