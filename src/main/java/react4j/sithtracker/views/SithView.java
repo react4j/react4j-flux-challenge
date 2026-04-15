@@ -21,7 +21,7 @@ abstract class SithView
   @Nonnull
   private final SithModel _sith;
 
-  SithView( @Nonnull final SithTrackerModel model, @Nonnull @Input( immutable = true ) final SithModel sith )
+  SithView( @Nonnull final SithTrackerModel model, @Nonnull @Input final SithModel sith )
   {
     _model = Objects.requireNonNull( model );
     _sith = Objects.requireNonNull( sith );
