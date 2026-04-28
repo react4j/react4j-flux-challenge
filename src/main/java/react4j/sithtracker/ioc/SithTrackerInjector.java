@@ -10,7 +10,8 @@ import sting.Injector;
 @Injector( includes = { SithTrackerViewFactory.class,
                         SithListViewFactory.class,
                         SithViewFactory.class,
-                        SithTrackerModel.class } )
+                        SithTrackerModel.class },
+           fragmentOnly = false )
 public interface SithTrackerInjector
 {
   @Nonnull
