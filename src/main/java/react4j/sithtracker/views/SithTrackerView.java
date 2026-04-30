@@ -9,8 +9,8 @@ import react4j.dom.proptypes.html.HtmlProps;
 import react4j.sithtracker.model.SithTrackerModel;
 import static react4j.dom.DOM.*;
 
-@View( type = View.Type.TRACKING )
-public abstract class SithTrackerView
+@View( type = View.Type.TRACKING, exportBuilder = true )
+abstract class SithTrackerView
 {
   @Nonnull
   private final SithTrackerModel _model;
