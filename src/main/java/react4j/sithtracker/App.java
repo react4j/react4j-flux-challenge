@@ -7,7 +7,7 @@ import arez.spytools.browser.react4j.ReactArezSpyUtil;
 import com.google.gwt.core.client.EntryPoint;
 import react4j.dom.ReactDOM;
 import react4j.sithtracker.ioc.SithTrackerInjector;
-import react4j.sithtracker.views.SithTrackerViewBuilder;
+import react4j.sithtracker.views.SithTrackerBuilder;
 
 public class App
   implements EntryPoint
@@ -25,6 +25,6 @@ public class App
     SithTrackerInjector.create();
     final Element element = WindowGlobal.document().getElementById( "app" );
     assert null != element;
-    ReactDOM.render( SithTrackerViewBuilder.build(), element );
+    ReactDOM.render( SithTrackerBuilder.build(), element );
   }
 }

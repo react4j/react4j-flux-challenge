@@ -29,7 +29,7 @@ abstract class SithTrackerView
                      h1( new HtmlProps().className( "css-planet-monitor" ),
                          "Obi-Wan currently on " + _model.getCurrentPlanet().getName() ),
                      section( new HtmlProps().className( "css-scrollable-list" ),
-                              ul( new HtmlProps().className( "css-slots" ), SithListViewBuilder.build() ),
+                              ul( new HtmlProps().className( "css-slots" ), SithListBuilder.build() ),
                               div( new HtmlProps().className( "css-scroll-buttons" ),
                                    ScrollButtonBuilder
                                      .className( "up" )

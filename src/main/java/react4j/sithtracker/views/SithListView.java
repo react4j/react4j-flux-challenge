@@ -26,6 +26,6 @@ abstract class SithListView
     return fragment( _model
                        .getSiths()
                        .stream()
-                       .map( sith -> null == sith ? EmptySithViewBuilder.build() : SithViewBuilder.sith( sith ) ) );
+                       .map( sith -> null == sith ? EmptySithBuilder.build() : SithBuilder.sith( sith ) ) );
   }
 }
